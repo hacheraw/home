@@ -1,0 +1,203 @@
+* {
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+
+  & li {
+    cursor: pointer;
+  }
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  grid-template:
+    "menu menu menu"
+    "sidebar explorer editor"
+    "sidebar explorer editor"
+    "footer footer footer";
+  grid-template-columns: 50px min-content 1fr;
+  grid-template-rows: 32px 1fr 24px;
+  font-family: Varta, sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  grid-area: menu;
+  padding-left: 6px;
+  color: #ccc;
+  background-color: #3c3c3c;
+
+  & .logo {
+    display: flex;
+
+    & img {
+      margin: 0 8px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  & ul {
+    height: 100%;
+
+    & li {
+      display: flex;
+      padding: 0 8px;
+      place-items: center;
+
+      &:hover {
+        box-shadow: inset 0 0 100px 100px #fff1;
+      }
+    }
+
+    &.window-buttons {
+      margin-left: auto;
+
+      & li {
+        display: flex;
+        padding: 0 16px;
+        place-items: center;
+      }
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  height: 36px;
+  align-items: center;
+  grid-area: tabs;
+  background-color: #282828;
+  white-space: nowrap;
+  overflow: hidden;
+
+  & a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 6px;
+    color: #7f7f7f;
+
+    &.js-tabs-title-active {
+      background-color: #1e1e1e;
+    }
+
+    & svg {
+      display: inline-block;
+      border-radius: 25%;
+      margin-left: 3px;
+      height: 16px;
+      width: 16px;
+      opacity: 0;
+    }
+
+    &:hover svg,
+    &.js-tabs-title-active svg {
+      opacity: 1;
+    }
+
+    & svg:hover {
+      box-shadow: inset 0 0 100px 100px #fff1;
+    }
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-area: sidebar;
+  background-color: #2d2d2d;
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+
+    & li:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  & svg {
+    color: #7f7f7f;
+    max-height: 26px;
+    width: 26px;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.explorer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-area: explorer;
+  background-color: #252526;
+  resize: horizontal;
+  overflow-x: hidden;
+  min-width: 20px;
+}
+
+.editor {
+  grid-area: editor;
+  background-color: #1e1e1e;
+
+  & .body {
+    font-family: consolas, monospace;
+    padding: 10px;
+    height: 100%;
+    overflow: auto; /* TODO: No funciona ¿Será por grid? */
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  grid-area: footer;
+  background-color: #007acc;
+}
+
+.tooltip {
+  position: absolute;
+  padding: 4px;
+  background-color: #252526;
+  border: 1px solid #7f7f7f77;
+  font-size: 0.9rem;
+  text-align: center;
+
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 94%, 52% 94%, 50% 100%, 48% 94%, 0 94%); */
+
+  &::after {
+    border-left: solid transparent 5px;
+    border-right: solid transparent 5px;
+    border-top: solid #7f7f7f 5px;
+    bottom: -6px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -10px;
+    position: absolute;
+    width: 2px;
+  }
+}
+
+[data-tooltip] {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: inset 0 0 100px 100px #fff1;
+  }
+}
